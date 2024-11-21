@@ -1,6 +1,9 @@
 /**
 Web speech routines for voice canvas app
 */
+const MAX_CHAR_LENGTH = 2000;
+let isRecording = false;
+
 
 function initSpeechLib()
 {
@@ -17,11 +20,9 @@ function initSpeechLib()
 
 function captureSpeech()
 {
-	const MAX_CHAR_LENGTH = 2000;
 	var recordButton = document.getElementById("rec_btn");
 	var feedbackBox = document.getElementById("fb_box");
 	var dataForm = document.getElementById("createform");
-	let isRecording = false;
 	var userText = "";
 	
 	const speechAPI = initSpeechLib();
