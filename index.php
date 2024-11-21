@@ -4,17 +4,11 @@
 	<title>VoiceCanvas</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">-->
 	
-	<!-- Favicons -->
 	<link href="images/favicon.png" rel="icon">
-
-    <!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="css/voicecanvas.css">
     <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Additional CSS Files -->
     <link rel="stylesheet" href="css/fontawesome.css">
-    <link rel="stylesheet" href="css/voicecanvas.css">
     <link rel="stylesheet" href="css/owl.css">
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/swiper-bundle.min.css">
@@ -53,17 +47,14 @@
     </div>
   </div>
 
-  <!-- ***** Header Area Start ***** -->
   <header class="header-area header-sticky">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <nav class="main-nav">
-                    <!-- ***** Logo Start ***** -->
                     <a href="index.php" class="logo">
 						<img src="images/logo.png">
                     </a>
-                    <!-- ***** Logo End ***** -->
                     <ul class="nav">
                       <li><a href="index.php" class="active">Home</a></li>
                       <li><a href="about.php">About</a></li>
@@ -82,7 +73,7 @@
 			<input type="hidden" id="captured_text" name="captured_text">
 		</form>
 	</div>
-	<div id="fb_box">check</div>
+	<div id="fb_box"></div>
   <div class="main-banner">
     <div class="owl-carousel owl-banner">
       <div class="item item-1">
