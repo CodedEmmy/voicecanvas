@@ -16,7 +16,7 @@
 
 <body>
 
-  <!-- ***** Preloader Start ***** 
+  <!--  Preloader -->
   <div id="js-preloader" class="js-preloader">
     <div class="preloader-inner">
       <span class="dot"></span>
@@ -27,7 +27,6 @@
       </div>
     </div>
   </div>
-  <!-- ***** Preloader End ***** -->
 
   <div class="sub-header">
     <div class="container">

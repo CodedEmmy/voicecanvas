@@ -70,13 +70,20 @@
 		  <div class="row">
 			<div class="col-lg-12">
 			  <div class="main-content">
-				<p>About Voice Canvas text
-				
+				<p>VoiceCanvas is an AI-based image generation tool that uses an audio description of the desired image to generate an image for the user.</p>
+				<p>
+				<strong>Usage:</strong><br>
+				To generate an image, click on the "Create New" Button at the top-right of the home page. Using your connected microphone, give an audio description of the image you wish to generate. Click on the "Next" button and your image will be generated.
+				<br>A transcript of your words will be displayed on the screen as you speak.<br>Note that there's a limit on the length of the description so make your audio description brief and concise.
+				</p>
+				<p>
+				This app utilizes the web speech recognition API and will only work with browsers that support the <em>web speech recognition API</em>
+				<br><br><em>AI Image generation is powered by the LimeWire AI API</em>
 				</p>
 				<hr>
 				<p id="ic">
 				Image Credits:<br>
-				Some of the images used on this portal were obtained from the following artists:<br>
+				Some of the images used on this app were obtained from the following artists:<br>
 				* <a href="https://pixabay.com/users/openclipart-vectors-30363/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=153532">OpenClipart-Vectors</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=153532">Pixabay</a><br>
 				* <a href="https://pixabay.com/users/pexels-2286921/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1850856">Pexels</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1850856">Pixabay</a><br>
 				* <a href="https://pixabay.com/users/publicdomainpictures-14/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=316440">PublicDomainPictures</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=316440">Pixabay</a><br>

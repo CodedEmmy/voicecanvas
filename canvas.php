@@ -1,7 +1,59 @@
+<?php
+include_once("config.php");
+
+$imageData = "";
+$inputPrompt = "";
+$confidenceLevel = 0;
+$statusMessage = "";
+$noError = true;
+if(isset($_POST['captured_text'])){
+	$inputPrompt = trim($_POST['captured_text']);
+	$confidenceLevel = trim($_POST['confidence']);
+	
+	$curl = curl_init();
+	$payload = array("prompt" => $inputPrompt, "aspect_ratio" => "1:1", "quality" => "MID", "style" => "PHOTOREALISTIC", "guidance_scale" => 50);
+	
+	curl_setopt_array($curl, [
+		CURLOPT_HTTPHEADER =>["Accept: application/json","Authorization: Bearer $API_KEY", "Content-Type: application/json", "X-Api-Version: v1"],
+		CURLOPT_POSTFIELDS => json_encode($payload),
+		CURLOPT_PORT => "",
+		CURLOPT_URL => $AI_ENDPOINT,
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_CUSTOMREQUEST => "POST",
+		]);
+	
+	$response = curl_exec($curl);
+	$error = curl_error($curl);
+	//Can optionally use http status codes to determine the status of the operation
+	//$httpCode = curl_getinfo($curl, CURL_INFO_HTTP_CODE);
+	curl_close($curl);
+	if($error){
+		$statusMessage = "cURL Error: ".$error;
+		$noError = false;
+	}else{
+		$data = json_decode($response, true);
+		$opStatus = $data["status"];
+		if($opStatus == 400 || $opStatus == 401 || $opStatus == 429 || $opStatus == 500){
+			$noError = false;
+			$statusMessage = "Error: ".$data['title']." (".$data['detail'].")";
+		}else if($opStatus == "FAILED"){
+			$noError = false;
+			$statusMessage = "Error: ".$data['failure_code']." (".$data['failure_reason'].")";
+		}else if($opStatus == "IN_PROGRESS"){
+			$statusMessage = "Processing";
+			$noError = false;
+		}else if($opStatus == "COMPLETED"){
+			$statusMessage = "Successfully Completed";
+			$dataArray = $data["data"];
+			$imageData = $dataArray[0];
+		}
+	}
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-	<title>VoiceCanvas</title>
+	<title>VoiceCanvas - Image</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="images/favicon.png" rel="icon">
@@ -53,7 +105,7 @@
         </div>
     </div>
   </header>
-	<div id="fb_box"></div>
+	<div id="fb_box"><?php echo $statusMessage; ?></div>
 	
 	<div class="page-heading header-text">
 		<div class="container">
@@ -70,11 +122,19 @@
 		  <div class="row">
 			<div class="col-lg-8">
 			  <div class="main-image">
-				<img src="images/default.jpg" alt="">
+			  <?php
+			  if($noError){
+				  echo "<img src='{$imageData['asset_url']}' alt=''>";
+			  }else{
+				  echo "<img src='images/default.jpg' alt=''>";
+			  }
+			  ?>
 			  </div>
 			  <div class="main-content">
 				<h4>Input Prompt</h4>
-				<p>Prompt text</p>
+				<p><?php echo $inputPrompt;
+					echo "<br><br><strong>Confidence Level:</strong> $confidenceLevel";
+					?></p>
 			  </div> 
 			</div>
 			<div class="col-lg-4">
@@ -82,19 +142,19 @@
 				<ul>
 				  <li>
 					<img src="images/marker.png" alt="" style="max-width: 52px;">
-					<h4>Image/JPEG<br><span>Image Type</span></h4>
+					<h4><?php echo $imageData["type"]; ?><br><span>Image Type</span></h4>
 				  </li>
 				  <li>
 					<img src="images/marker.png" alt="" style="max-width: 52px;">
-					<h4>800px<br><span>Width</span></h4>
+					<h4><?php echo $imageData["width"]; ?><br><span>Width</span></h4>
 				  </li>
 				  <li>
 					<img src="images/marker.png" alt="" style="max-width: 52px;">
-					<h4>350px<br><span>Height</span></h4>
+					<h4><?php echo $imageData["height"]; ?><br><span>Height</span></h4>
 				  </li>
 				  <li>
 					<img src="images/marker.png" alt="" style="max-width: 52px;">
-					<h4>Download<br><span>Download link</span></h4>
+					<h4><a href="<?php echo $imageData['asset_url']; ?>">Image Link</a><br><span>(Available for 24 hours)</span></h4>
 				  </li>
 				</ul>
 			  </div>
