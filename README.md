@@ -1,2 +1,2 @@
 # voicecanvas
-A simple voice to AI image generator
+A simple AI voice to image generator
