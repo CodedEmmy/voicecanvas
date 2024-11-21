@@ -58,7 +58,7 @@
                     <ul class="nav">
                       <li><a href="index.php" class="active">Home</a></li>
                       <li><a href="about.php">About</a></li>
-                      <li><a href="javascript:void(0)" onclick="captureSpeech();"><i class="fa fa-microphone"></i> Create</a></li>
+                      <li><a href="javascript:void(0)" onclick="captureSpeech();" id="rec_btn"><i class="fa fa-microphone"></i> Create New</a></li>
                   </ul>   
                     <a class='menu-trigger'>
                         <span>Menu</span>
@@ -70,7 +70,8 @@
   </header>
 	<div>
 		<form id="createform" name="createform" method="post" action="canvas.php">
-			<input type="hidden" id="captured_text" name="captured_text">
+			<input type="hidden" id="captured_text" name="captured_text" value="Artist painting a scene with a microphone in his hand.">
+			<input type="hidden" id="confidence" name="confidence" value="0">
 		</form>
 	</div>
 	<div id="fb_box"></div>
