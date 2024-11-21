@@ -69,6 +69,7 @@ function captureSpeech()
 		}else{
 			speechAPI.start();
 			recordButton.innerHTML = "<i class='fa fa-microphone'></i> Next Step";
+			feedbackBox.innerHTML = "Recording Active: Start your image description";
 		}
 		isRecording = !isRecording;
 	}
