@@ -23,6 +23,7 @@ function captureSpeech()
 	var recordButton = document.getElementById("rec_btn");
 	var feedbackBox = document.getElementById("fb_box");
 	var dataForm = document.getElementById("createform");
+	dataForm.addEventListener("submit",(e) => {e.preventDefault();});
 	var userText = "";
 	
 	const speechAPI = initSpeechLib();
@@ -31,9 +32,11 @@ function captureSpeech()
 	}else{
 		speechAPI.onresult = function(event){
 			var conLevel = 0;
+			let hasFinal = false;
 			for(var i = event.resultIndex; i < event.results.length;i++){
 				if(event.results[i].isFinal){
 					userText = event.results[i][0].transcript;
+					hasFinal = true;
 				}else{
 					userText += event.results[i][0].transcript;
 				}
@@ -44,23 +47,30 @@ function captureSpeech()
 				feedbackBox.innerHTML = userText;
 				conLevel = event.results[i][0].confidence;
 			}
-			dataForm.captured_text.value = userText;
-			dataForm.confidence.value = conLevel;
-			dataForm.submit();
+			if(hasFinal && userText.length > 0){
+				dataForm.captured_text.value = userText;
+				dataForm.confidence.value = conLevel;
+				dataForm.submit();
+			}
 		}
 		
 		speechAPI.onerror = function(event){
 			var errorMessage = "Error: " + event.error;
 			feedbackBox.innerHTML = errorMessage;
 			recordButton.innerHTML = "<i class='fa fa-microphone'></i> Create New";
+			isRecording = false;
 		}
 		
 		speechAPI.onspeechend = function(event){
 			recordButton.innerHTML = "<i class='fa fa-microphone'></i> Create New";
+			isRecording = false;
+			speechAPI.stop();
 		}
 		
 		speechAPI.onend = function(event){
 			recordButton.innerHTML = "<i class='fa fa-microphone'></i> Create New";
+			isRecording = false;
+			speechAPI.stop();
 		}
 		
 		if(isRecording){
@@ -68,7 +78,7 @@ function captureSpeech()
 			recordButton.innerHTML = "<i class='fa fa-microphone'></i> Create New";
 		}else{
 			speechAPI.start();
-			recordButton.innerHTML = "<i class='fa fa-microphone'></i> Next Step";
+			recordButton.innerHTML = "<i class='fa fa-microphone'></i> Recording ...";
 			feedbackBox.innerHTML = "Recording Active: Start your image description";
 		}
 		isRecording = !isRecording;
