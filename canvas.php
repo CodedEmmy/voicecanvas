@@ -35,7 +35,7 @@ if(isset($_POST['captured_text'])){
 		$opStatus = $data["status"];
 		if($opStatus == 400 || $opStatus == 401 || $opStatus == 429 || $opStatus == 500){
 			$noError = false;
-			$statusMessage = "Error: ".$data['title']." (".$data['detail'].")";
+			$statusMessage = "Error: ".$data['detail'];
 		}else if($opStatus == "FAILED"){
 			$noError = false;
 			$statusMessage = "Error: ".$data['failure_code']." (".$data['failure_reason'].")";
@@ -46,6 +46,9 @@ if(isset($_POST['captured_text'])){
 			$statusMessage = "Successfully Completed";
 			$dataArray = $data["data"];
 			$imageData = $dataArray[0];
+		}else{
+			$noError = false;
+			$statusMessage = "Error: ".$data['detail'];
 		}
 	}
 }
@@ -71,7 +74,7 @@ if(isset($_POST['captured_text'])){
 		  <div class="row">
 			<div class="col-lg-10 col-md-10">
 			  <ul class="info">
-				<li><i class="fa fa-microphone"></i> Voice Only</li>
+				<li><i class="fa fa-microphone"></i> Voice-based</li>
 				<li><i class="fa fa-image"></i> AI Imagery</li>
 			  </ul>
 			</div>
@@ -89,11 +92,11 @@ if(isset($_POST['captured_text'])){
         <div class="row">
             <div class="col-12">
                 <nav class="main-nav">
-                    <a href="index.php" class="logo">
+                    <a href="./" class="logo">
 						<img src="images/logo.png">
                     </a>
                     <ul class="nav">
-                      <li><a href="index.php" class="active">Home</a></li>
+                      <li><a href="./" class="active">Home</a></li>
                       <li><a href="about.php">About</a></li>
                       <li>&nbsp;</li>
                   </ul>   
@@ -142,19 +145,19 @@ if(isset($_POST['captured_text'])){
 				<ul>
 				  <li>
 					<img src="images/marker.png" alt="" style="max-width: 52px;">
-					<h4><?php echo $imageData["type"]; ?><br><span>Image Type</span></h4>
+					<h4><?php if($noError){ echo $imageData["type"]; }else{ echo "N/A"; } ?><br><span>Image Type</span></h4>
 				  </li>
 				  <li>
 					<img src="images/marker.png" alt="" style="max-width: 52px;">
-					<h4><?php echo $imageData["width"]; ?><br><span>Width</span></h4>
+					<h4><?php if($noError){ echo $imageData["width"]; }else{ echo "N/A"; } ?><br><span>Width</span></h4>
 				  </li>
 				  <li>
 					<img src="images/marker.png" alt="" style="max-width: 52px;">
-					<h4><?php echo $imageData["height"]; ?><br><span>Height</span></h4>
+					<h4><?php if($noError){ echo $imageData["height"]; }else{ echo "N/A"; } ?><br><span>Height</span></h4>
 				  </li>
 				  <li>
 					<img src="images/marker.png" alt="" style="max-width: 52px;">
-					<h4><a href="<?php echo $imageData['asset_url']; ?>">Image Link</a><br><span>(Available for 24 hours)</span></h4>
+					<h4><a href="<?php if($noError){ echo $imageData['asset_url']; }else{ echo "N/A"; } ?>">Image Link</a><br><span>Valid for 24 hours</span></h4>
 				  </li>
 				</ul>
 			  </div>

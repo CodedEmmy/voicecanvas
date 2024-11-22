@@ -20,7 +20,7 @@
 		  <div class="row">
 			<div class="col-lg-10 col-md-10">
 			  <ul class="info">
-				<li><i class="fa fa-microphone"></i> Voice Only</li>
+				<li><i class="fa fa-microphone"></i> Voice-based</li>
 				<li><i class="fa fa-image"></i> AI Imagery</li>
 			  </ul>
 			</div>
@@ -38,11 +38,11 @@
 			<div class="row">
 				<div class="col-12">
 					<nav class="main-nav">
-						<a href="index.php" class="logo">
+						<a href="./" class="logo">
 							<img src="images/logo.png">
 						</a>
 						<ul class="nav">
-						  <li><a href="index.php">Home</a></li>
+						  <li><a href="./">Home</a></li>
 						  <li><a href="about.php" class="active">About</a></li>
 						  <li>&nbsp;</li>
 					  </ul>   
