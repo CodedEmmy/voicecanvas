@@ -50,7 +50,10 @@ Follow these steps to set up the app on your server.
 
 The following are some screenshots of the app.
 ![screenshot](scrnshot/shot1.jpg)
+
 ![screenshot](scrnshot/shot2.jpg)
+
+A short demo video can be viewed here. [View Demo Video](https://www.loom.com/share/c043be720b4b4bbbb8bf347c74bd5325?sid=a8e79985-abf4-4f91-b167-4c96f46b6381)
 
 
 ## Tech Stack
