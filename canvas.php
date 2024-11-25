@@ -136,8 +136,10 @@ if(isset($_POST['captured_text'])){
 			  <div class="main-content">
 				<h4>Input Prompt</h4>
 				<p><?php echo $inputPrompt;
-					echo "<br><br><strong>Confidence Level:</strong> $confidenceLevel";
-					?></p>
+					echo "<br><br><strong>Average Confidence Level for transcript:</strong> $confidenceLevel";
+					?>
+					<br><em>Note: the confidence value feature of the speech API is currently still in development and may not be an accurate representation.</em>
+				</p>
 			  </div> 
 			</div>
 			<div class="col-lg-4">
